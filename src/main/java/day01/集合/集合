@@ -1,0 +1,63 @@
+Collections与 Collection区别
+
+Collection，是单列集合的接口，有子接口List和Set
+Collections，是针对集合操作的静态工具类，其中包含对集合进行排序和二分查找的方法
+2，Collections常用方法
+public static <T> void sort (List<T> list)：排序，默认情况下是自然排序
+public static <T> int binarySearch (List<?> list, T key)：二分查找
+public static <T> T max (Collection<?> coll)：最大值（最小值类似用法）
+public static void reverse (List<?> list) ：顺序反转
+public static void shuffle (List<?> list)：随机置换
+
+数组和集合的区别:
+    1:长度的区别
+数组的长度固定
+集合的长度可变
+
+    2:元素的数据类型
+数组可以存储基本数据类型,也可以存储引用类型
+集合只能存储引用类型(你存储的是简单的int，它会自动装箱成Integer)
+
+Collection的源码中继承了Iterable，有iterator()这个方法
+Iterator也是一个接口，它只有三个方法：
+hasNext()
+next()
+remove()
+ArrayList下找到了iterator实现的身影：它是在ArrayList以内部类的方式实现的！
+并且，从源码可知：Iterator实际上就是在遍历集合
+Set集合常用子类
+HashSet集合
+A:底层数据结构是哈希表(是一个元素为链表的数组)它能保证元素的唯一性
+HashSet集合中存储自定义元素时，保证元素唯一性的方式是，复写元素的hashCode方法和equals方法
+hashCode相同equals不同以链表方法存储 当为接点8时红黑树平衡 jdk1.8
+
+
+TreeSet集合
+A:底层数据结构是红黑树(是一个自平衡的二叉树)
+B:保证元素的排序方式
+
+LinkedHashSet集合
+A:：底层数据结构由哈希表和链表组成
+
+List集合常用的子类有三个：
+ArrayList
+底层数据结构是数组。线程不安全 ArrayList增长原来的0.5倍
+
+LinkedList
+底层数据结构是链表。线程不安全
+
+Vector
+底层数据结构是数组。线程安全  过时
+
+Map没有继承Collection接口不属于集合，它是提供key到value的映射，来决定遍历对象的顺序
+
+扩容
+性能优化:直接在初始化的时候就设置容量！
+
+
+集合框架中的泛型有什么优点？
+　　Java1.5引入了泛型，所有的集合接口和实现都大量地使用它。
+　　泛型允许我们为集合提供一个可以容纳的对象类型，因此，如果你添加其它类型的任何元素，它会在编译时报错。
+　　这避免了在运行时出现ClassCastException，因为你将会在编译时得到报错信息。　　
+　　泛型也使得代码整洁，我们不需要使用显式转换和instanceOf操作符。它也给运行时带来好处，因为不会产生类型检查的字节码指令。
+
